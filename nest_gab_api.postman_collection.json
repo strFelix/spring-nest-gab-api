@@ -1,0 +1,597 @@
+{
+  "info": {
+    "name": "Nest GAB API",
+    "description": "Coleção completa de endpoints da API Nest - Plataforma de Inovação Corporativa GAB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "token_operator",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "token_manager",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "token_leader",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login - Operator",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.collectionVariables.set('token_operator', res.token);",
+                  "  console.log('Token Operator salvo!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"carlos.operador@aguiabranca.com.br\",\n  \"password\": \"nest123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login - Manager",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.collectionVariables.set('token_manager', res.token);",
+                  "  console.log('Token Manager salvo!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ana.gestora@aguiabranca.com.br\",\n  \"password\": \"nest123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login - Leader",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.token) {",
+                  "  pm.collectionVariables.set('token_leader', res.token);",
+                  "  console.log('Token Leader salvo!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"roberto.lider@aguiabranca.com.br\",\n  \"password\": \"nest123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Novo Operador\",\n  \"email\": \"novo.operador@aguiabranca.com.br\",\n  \"password\": \"nest123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Strategic Guidelines",
+      "item": [
+        {
+          "name": "GET All Guidelines (any role)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_operator}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/guidelines",
+              "host": ["{{base_url}}"],
+              "path": ["api", "guidelines"]
+            }
+          }
+        },
+        {
+          "name": "GET Guideline by ID (any role)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_operator}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/guidelines/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "guidelines", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Create Guideline (LEADER)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Eficiência Energética 2025\",\n  \"content\": \"Priorizar iniciativas que reduzam o consumo energético da frota em pelo menos 15% até o final de 2025. Foco em rotas mais eficientes e adoção de veículos elétricos nas operações urbanas.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/guidelines",
+              "host": ["{{base_url}}"],
+              "path": ["api", "guidelines"]
+            }
+          }
+        },
+        {
+          "name": "PUT Update Guideline (LEADER)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Eficiência Energética 2025 - Atualizado\",\n  \"content\": \"Priorizar iniciativas que reduzam o consumo energético da frota em pelo menos 20% até o final de 2025.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/guidelines/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "guidelines", "1"]
+            }
+          }
+        },
+        {
+          "name": "DELETE Guideline - Soft Delete (LEADER)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/guidelines/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "guidelines", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ideas",
+      "item": [
+        {
+          "name": "POST Create Idea (OPERATOR)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_operator}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Sistema de rastreamento em tempo real\",\n  \"description\": \"Implementar rastreamento GPS em tempo real para todos os veículos da frota, permitindo monitoramento centralizado e redução de desvios de rota. Estimativa de redução de 20% no consumo de combustível.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ideas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas"]
+            }
+          }
+        },
+        {
+          "name": "GET My Ideas (OPERATOR)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_operator}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/ideas/my",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas", "my"]
+            }
+          }
+        },
+        {
+          "name": "GET All Ideas (MANAGER)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/ideas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas"]
+            }
+          }
+        },
+        {
+          "name": "GET Ideas by Status (MANAGER)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/ideas?status=PENDING",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas"],
+              "query": [
+                { "key": "status", "value": "PENDING", "description": "PENDING | PRIORITIZED | APPROVED | REJECTED" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Idea by ID (OPERATOR or MANAGER)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/ideas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas", "1"]
+            }
+          }
+        },
+        {
+          "name": "PATCH Review Idea - Prioritize (MANAGER)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"PRIORITIZED\",\n  \"priority\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ideas/1/review",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas", "1", "review"]
+            }
+          }
+        },
+        {
+          "name": "PATCH Review Idea - Approve (MANAGER)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"APPROVED\",\n  \"priority\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ideas/1/review",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas", "1", "review"]
+            }
+          }
+        },
+        {
+          "name": "PATCH Review Idea - Reject (MANAGER)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"REJECTED\",\n  \"priority\": null\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ideas/1/review",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas", "1", "review"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "POST Create Project (MANAGER)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Rastreamento GPS Frota\",\n  \"description\": \"Implementação do sistema de rastreamento GPS em tempo real para toda a frota da divisão de Logística. Fase 1 contempla 50 veículos nas rotas urbanas de São Paulo.\",\n  \"status\": \"PLANNING\",\n  \"stage\": \"PLANNING\",\n  \"investment\": 180000.00,\n  \"expectedReturn\": 650000.00,\n  \"actualReturn\": null,\n  \"productivityGain\": null,\n  \"startDate\": \"2025-06-01\",\n  \"endDate\": \"2025-12-31\",\n  \"ideaId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"]
+            }
+          }
+        },
+        {
+          "name": "POST Create Project without Idea (MANAGER)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Treinamento Digital Operadores\",\n  \"description\": \"Programa de capacitação digital para os operadores da divisão de Passageiros, com foco em uso de sistemas mobile e coleta de dados operacionais.\",\n  \"status\": \"IN_PROGRESS\",\n  \"stage\": \"EXECUTION\",\n  \"investment\": 45000.00,\n  \"expectedReturn\": 120000.00,\n  \"actualReturn\": null,\n  \"productivityGain\": 12.50,\n  \"startDate\": \"2025-04-01\",\n  \"endDate\": \"2025-08-31\",\n  \"ideaId\": null\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"]
+            }
+          }
+        },
+        {
+          "name": "GET All Projects (MANAGER or LEADER)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"]
+            }
+          }
+        },
+        {
+          "name": "GET Project by ID (MANAGER or LEADER)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "1"]
+            }
+          }
+        },
+        {
+          "name": "PUT Update Project Progress (MANAGER)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Rastreamento GPS Frota\",\n  \"description\": \"Implementação do sistema de rastreamento GPS em tempo real para toda a frota da divisão de Logística.\",\n  \"status\": \"IN_PROGRESS\",\n  \"stage\": \"EXECUTION\",\n  \"investment\": 180000.00,\n  \"expectedReturn\": 650000.00,\n  \"actualReturn\": 320000.00,\n  \"productivityGain\": 18.50,\n  \"startDate\": \"2025-06-01\",\n  \"endDate\": \"2025-12-31\",\n  \"ideaId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "1"]
+            }
+          }
+        },
+        {
+          "name": "PUT Complete Project (MANAGER)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"App Autoatendimento Passageiros\",\n  \"description\": \"Desenvolvimento e implantação do canal mobile de autoatendimento.\",\n  \"status\": \"COMPLETED\",\n  \"stage\": \"COMPLETED\",\n  \"investment\": 250000.00,\n  \"expectedReturn\": 900000.00,\n  \"actualReturn\": 870000.00,\n  \"productivityGain\": 32.00,\n  \"startDate\": \"2025-03-01\",\n  \"endDate\": \"2025-09-30\",\n  \"ideaId\": 3\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "GET Dashboard (LEADER)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dashboard"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Access Control Validation",
+      "description": "Requisições que devem retornar 403 - para validar o controle de acesso por role",
+      "item": [
+        {
+          "name": "403 - Operator tentando ver todas as ideias",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_operator}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/ideas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas"]
+            }
+          }
+        },
+        {
+          "name": "403 - Operator tentando criar projeto",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_operator}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Projeto Indevido\",\n  \"description\": \"Operador tentando criar projeto\",\n  \"status\": \"PLANNING\",\n  \"stage\": \"IDEATION\",\n  \"investment\": 1000.00,\n  \"expectedReturn\": 2000.00,\n  \"startDate\": \"2025-01-01\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"]
+            }
+          }
+        },
+        {
+          "name": "403 - Manager tentando ver dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "dashboard"]
+            }
+          }
+        },
+        {
+          "name": "403 - Manager tentando criar diretriz",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_manager}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Diretriz Indevida\",\n  \"content\": \"Manager tentando criar diretriz\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/guidelines",
+              "host": ["{{base_url}}"],
+              "path": ["api", "guidelines"]
+            }
+          }
+        },
+        {
+          "name": "403 - Leader tentando criar ideia",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token_leader}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Ideia Indevida\",\n  \"description\": \"Leader tentando criar ideia\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/ideas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "ideas"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
