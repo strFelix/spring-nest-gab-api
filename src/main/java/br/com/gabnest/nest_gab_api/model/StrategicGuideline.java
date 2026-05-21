@@ -28,6 +28,8 @@ public class StrategicGuideline {
     private String content;
 
     @Column(name = "ACTIVE", nullable = false)
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.SMALLINT)
+    @Builder.Default
     private Boolean active = true;
 
     @ManyToOne(fetch = FetchType.LAZY)

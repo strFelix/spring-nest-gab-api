@@ -36,6 +36,8 @@ public class User {
     private UserRole role;
 
     @Column(name = "ACTIVE", nullable = false)
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.SMALLINT)
+    @Builder.Default
     private Boolean active = true;
 
     @CreationTimestamp

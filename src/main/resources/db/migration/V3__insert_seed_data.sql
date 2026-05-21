@@ -2,21 +2,21 @@
 INSERT INTO TB_USER (NAME, EMAIL, PASSWORD, ROLE) VALUES (
     'Carlos Operador',
     'carlos.operador@aguiabranca.com.br',
-    '$2a$10$7QJ8zV3kL9mN2pX6wY1uOeR4sT5vU0iA3bC8dE6fG9hI2jK4lM7n',
+    '$2a$10$isqe25sTQA/9XHKFHFCHp.ZaspiB40n2SYLXXcrzKx4AzdCXgFkDW',
     'OPERATOR'
 );
 
 INSERT INTO TB_USER (NAME, EMAIL, PASSWORD, ROLE) VALUES (
     'Ana Gestora',
     'ana.gestora@aguiabranca.com.br',
-    '$2a$10$7QJ8zV3kL9mN2pX6wY1uOeR4sT5vU0iA3bC8dE6fG9hI2jK4lM7n',
+    '$2a$10$isqe25sTQA/9XHKFHFCHp.ZaspiB40n2SYLXXcrzKx4AzdCXgFkDW',
     'MANAGER'
 );
 
 INSERT INTO TB_USER (NAME, EMAIL, PASSWORD, ROLE) VALUES (
     'Roberto Lider',
     'roberto.lider@aguiabranca.com.br',
-    '$2a$10$7QJ8zV3kL9mN2pX6wY1uOeR4sT5vU0iA3bC8dE6fG9hI2jK4lM7n',
+    '$2a$10$isqe25sTQA/9XHKFHFCHp.ZaspiB40n2SYLXXcrzKx4AzdCXgFkDW',
     'LEADER'
 );
 
