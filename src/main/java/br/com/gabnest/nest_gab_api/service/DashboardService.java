@@ -26,7 +26,7 @@ public class DashboardService {
         var projects = projectRepository.findAll();
         var completedProjects = projectRepository.findByStatus(ProjectStatus.COMPLETED);
 
-        BigDecimal totalInvestment = projects.stream()
+        BigDecimal totalInvestmentCompleted = completedProjects.stream()
                 .map(p -> p.getInvestment() != null ? p.getInvestment() : BigDecimal.ZERO)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
@@ -35,13 +35,13 @@ public class DashboardService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal roi = BigDecimal.ZERO;
-        if (totalInvestment.compareTo(BigDecimal.ZERO) > 0) {
-            roi = totalActualReturn.subtract(totalInvestment)
-                    .divide(totalInvestment, 4, RoundingMode.HALF_UP)
+        if (totalInvestmentCompleted.compareTo(BigDecimal.ZERO) > 0) {
+            roi = totalActualReturn.subtract(totalInvestmentCompleted)
+                    .divide(totalInvestmentCompleted, 4, RoundingMode.HALF_UP)
                     .multiply(BigDecimal.valueOf(100));
         }
 
-        BigDecimal savings = totalActualReturn.subtract(totalInvestment);
+        BigDecimal savings = totalActualReturn.subtract(totalInvestmentCompleted);
 
         long ideasImplemented = ideaRepository.findByStatus(IdeaStatus.APPROVED).size();
 
